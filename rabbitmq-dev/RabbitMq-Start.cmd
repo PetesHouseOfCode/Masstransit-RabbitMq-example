@@ -1,0 +1,1 @@
+powershell "& "".\rabbitmq-start.ps1"""
