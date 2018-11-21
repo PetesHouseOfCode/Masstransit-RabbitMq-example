@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestQueryCommandConsumer2",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestQueryCommandPublisher", "TestQueryCommandPublisher\TestQueryCommandPublisher.csproj", "{95B2E86D-C42B-4ED9-A012-4E9CA6DE9A47}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Event", "Event", "{19E15301-F5C1-4993-8C99-8875270CD699}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QueryCommand", "QueryCommand", "{7D536612-DCA5-4ECC-B88F-56E4674A1251}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +64,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DDC563F3-0E75-40D8-A6A6-D1D97FD8CF91} = {19E15301-F5C1-4993-8C99-8875270CD699}
+		{4A8829D9-24A4-4E30-908B-5F9BF5837B3B} = {19E15301-F5C1-4993-8C99-8875270CD699}
+		{CE7951C7-46A0-4E6F-946E-F21633997BC2} = {19E15301-F5C1-4993-8C99-8875270CD699}
+		{40AC4234-2C91-42E0-A0D9-BAED698EBBCA} = {7D536612-DCA5-4ECC-B88F-56E4674A1251}
+		{548B3738-91E9-4419-AA7B-D87E3D2C6868} = {7D536612-DCA5-4ECC-B88F-56E4674A1251}
+		{95B2E86D-C42B-4ED9-A012-4E9CA6DE9A47} = {7D536612-DCA5-4ECC-B88F-56E4674A1251}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADC7D3E6-4235-4405-BB43-4342E3704C34}
