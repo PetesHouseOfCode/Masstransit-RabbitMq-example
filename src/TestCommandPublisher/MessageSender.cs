@@ -9,11 +9,12 @@ using Microsoft.Extensions.Logging;
 
 using TestTransit.Shared;
 
-namespace TestQueryCommandPublisher
+namespace TestCommandPublisher
 {
     public class MessageSender : IHostedService, IDisposable
     {
-        private readonly IRequestClient<IQueryCommand, IQueryCommandResult> _requestClient;
+
+        private readonly IBus _bus;
 
         private readonly ILogger<MessageSender> _logger;
 
@@ -21,11 +22,11 @@ namespace TestQueryCommandPublisher
 
         private int _counter = 0;
 
-        private bool _isTimerActive;
+        private bool _isTimerActive = true;
 
-        public MessageSender(IRequestClient<IQueryCommand, IQueryCommandResult> requestClient, ILogger<MessageSender> logger)
+        public MessageSender(IBus bus, ILogger<MessageSender> logger)
         {
-            _requestClient = requestClient;
+            _bus = bus;
             _logger = logger;
         }
 
@@ -45,10 +46,11 @@ namespace TestQueryCommandPublisher
         {
             if (!_isTimerActive)
                 return;
-            
+
             _counter++;
-            var message = _requestClient.Request(new { Id = NewId.NextGuid(), Name = $"Query Fired-{_counter}" }).Result;
-            _logger.LogInformation($"Received Result: {message.Name}");
+            var message = $"Query Fired-{_counter}";
+            _bus.Send<ICommand>(new { Id = NewId.NextGuid(), Name = message }).Wait();
+            _logger.LogInformation($"Sent Message \"{message}\"");
         }
 
         public void Dispose()

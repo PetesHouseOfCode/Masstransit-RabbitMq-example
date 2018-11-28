@@ -7,5 +7,7 @@
         public static readonly string EventConsumer2 = "test-event-consumer2.service";
 
         public static readonly string QueryCommandService = "test-querycommand-consumer.service";
+
+        public static readonly string CommandService = "test-command-consumer.service";
     }
 }

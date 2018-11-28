@@ -3,13 +3,14 @@
 using MassTransit;
 using MassTransit.ExtensionsDependencyInjectionIntegration;
 using MassTransit.NLogIntegration;
+using MassTransit.Util;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using TestTransit.Shared;
 
-namespace TestQueryCommandPublisher
+namespace TestCommandPublisher
 {
     public class Startup
     {
@@ -27,8 +28,6 @@ namespace TestQueryCommandPublisher
             services.AddSingleton<IPublishEndpoint>(provider => provider.GetRequiredService<IBusControl>());
             services.AddSingleton<ISendEndpointProvider>(provider => provider.GetRequiredService<IBusControl>());
             services.AddSingleton<IBus>(provider => provider.GetRequiredService<IBusControl>());
-            services.AddScoped(
-                provider => provider.GetRequiredService<IBus>().CreateRequestClient<IQueryCommand, IQueryCommandResult>(new Uri($"rabbitmq://localhost/{MessageQueue.QueryCommandService}"), TimeSpan.FromSeconds(15)));
 
             services.AddSingleton(
                 provider => Bus.Factory.CreateUsingRabbitMq(
@@ -44,6 +43,8 @@ namespace TestQueryCommandPublisher
                                         h.Username("rabbitmq");
                                         h.Password("rabbitmq");
                                     });
+
+                            EndpointConvention.Map<ICommand>(host.Address.AppendToPath(MessageQueue.CommandService));
                         }));
 
             services.AddHostedService<BusService>();
