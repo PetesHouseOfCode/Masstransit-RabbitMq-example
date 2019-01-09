@@ -45,7 +45,7 @@ namespace TestCommandConsumer2
                                 MessageQueue.CommandService,
                                 e =>
                                     {
-                                        e.PrefetchCount = 1;
+                                        //e.PrefetchCount = 1;
                                         // e.UseMessageRetry(x => x.Interval(2, 500));
 
                                         e.LoadFrom(provider);
